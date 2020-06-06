@@ -1,9 +1,9 @@
 bl_info = {
-    "name" : "CleanDublicateMaterials",
+    "name" : "Snaki Workflow Tools",
     "author" : "Snaki94",
-    "description" : "Clean dublicate materials from object",
-    "blender" : (2, 82, 0),
-    "version" : (0, 0, 1),
+    "description" : "..,",
+    "blender" : (2, 83, 0),
+    "version" : (0, 0, 2),
     "location" : "View3D",
     "warning" : "",
     "category" : "Generic"
@@ -11,9 +11,9 @@ bl_info = {
 
 import bpy
 
-from . remove_mublicate_materials_op import RemoveDublicateMaterials_Operator
-from . datablocks_pannel import Datablocks_Pannel
+from . mainPanel import MainPanel
+from . operators import RemoveDublicateMaterials_Operator
 
-classes = (RemoveDublicateMaterials_Operator, Datablocks_Pannel)
+classes = (RemoveDublicateMaterials_Operator, MainPanel)
 
 register, unregister = bpy.utils.register_classes_factory(classes)

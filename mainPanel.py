@@ -1,8 +1,8 @@
 import bpy
 
-class Datablocks_Pannel(bpy.types.Panel):
-    bl_idname = "Datablocks_Panel"
-    bl_label = "Datablocks"
+class MainPanel(bpy.types.Panel):
+    bl_idname = "MainPanel"
+    bl_label = "Main Panel"
     bl_category = "Tool"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
