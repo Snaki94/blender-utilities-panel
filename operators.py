@@ -1,9 +1,10 @@
 import bpy
+#import logging
 
 class RemoveDublicateMaterials_Operator(bpy.types.Operator):
-    bl_idname = "view.romove_dublicate_materials"
+    bl_idname = "object.remove_dublicate_materials"
     bl_label = "Remove Dublicate Materials"
-    bl_description = "Remove dublicate materials from the object"
+    bl_description = "Remove dublicate materials from the object."
 
     def execute(sel, context):
         mat_list = [x.material.name for x in bpy.context.object.material_slots]
@@ -29,4 +30,12 @@ class RemoveDublicateMaterials_Operator(bpy.types.Operator):
                 bpy.ops.object.material_slot_remove()
 
 
+        return {'FINISHED'}
+        
+class AddTriangulateModifier_Operator(bpy.types.Operator):
+    bl_idname = "object.add_triangulate_modifier"
+    bl_label = "AddTriangulateModifier"
+    bl_description = "Add Triangulate Modifier to selection objects."
+
+    def execute(self, context):
         return {'FINISHED'}

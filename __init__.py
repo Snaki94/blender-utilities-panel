@@ -11,9 +11,14 @@ bl_info = {
 
 import bpy
 
-from . mainPanel import MainPanel
-from . operators import RemoveDublicateMaterials_Operator
+from .mainPanel import MainPanel
+from .operators import RemoveDublicateMaterials_Operator
+from .operators import AddTriangulateModifier_Operator
 
-classes = (RemoveDublicateMaterials_Operator, MainPanel)
+classes = (
+    MainPanel,
+    RemoveDublicateMaterials_Operator,
+    AddTriangulateModifier_Operator,
+)
 
 register, unregister = bpy.utils.register_classes_factory(classes)

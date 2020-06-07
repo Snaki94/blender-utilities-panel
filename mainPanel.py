@@ -10,5 +10,7 @@ class MainPanel(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
 
-        row = layout.row()
-        row.operator('view.romove_dublicate_materials', text="Remove Dublicate Materials")
+        row01 = layout.row()
+        row01.operator('object.remove_dublicate_materials', text="Remove Dublicate Materials")
+        row02 = layout.row()
+        row02.operator('object.add_triangulate_modifier', text="Add Triangulate")
