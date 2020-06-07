@@ -13,11 +13,13 @@ import bpy
 
 from .mainPanel import MainPanel
 from .operators import RemoveDublicateMaterials_Operator
+from .operators import RemoveAllMaterials_Operator
 from .operators import AddTriangulateModifier_Operator
 
 classes = (
     MainPanel,
     RemoveDublicateMaterials_Operator,
+    RemoveAllMaterials_Operator,
     AddTriangulateModifier_Operator,
 )
 
