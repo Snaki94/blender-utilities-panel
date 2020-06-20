@@ -1,7 +1,6 @@
 import bpy
 
-class MainPanel(bpy.types.Panel):
-    bl_idname = "MainPanel"
+class VIEW3D_PT_workflowtools(bpy.types.Panel):
     bl_label = "Main Panel"
     bl_category = "Tool"
     bl_space_type = "VIEW_3D"
