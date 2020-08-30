@@ -67,3 +67,22 @@ class AddTriangulateModifier_Operator(bpy.types.Operator):
         self.report({'INFO'}, "Added triangulate modifier to selected objects")
         bpy.context.view_layer.update()
         return {'FINISHED'}
+
+class RemoveAllUnusedMaterials_Operator(bpy.types.Operator):
+    bl_idname = "object.remove_unused_materials"
+    bl_label = "RemoveUnusedMaterials"
+    bl_description = "Removes unused materials from all selected objects"
+
+    @classmethod
+    def poll(cls, context):
+        return context.selected_objects is not None
+
+    def execute(self, context):
+        for obj in bpy.context.selected_objects:
+            obj.active_material_index = 0
+            for i in range(len(obj.material_slots)):
+                bpy.ops.object.material_slot_remove_unused({'object': obj})
+
+        self.report({'INFO'}, "Removed unused unslots from selection")
+        bpy.context.view_layer.update()
+        return {'FINISHED'}

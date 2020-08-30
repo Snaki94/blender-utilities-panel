@@ -1,5 +1,5 @@
 bl_info = {
-    "name" : "Snaki Workflow Tools",
+    "name" : "Workflow Tools",
     "author" : "Snaki94, Zuorion",
     "description" : "Workflow Tools",
     "blender" : (2, 83, 0),
@@ -15,6 +15,7 @@ from .mainPanel import VIEW3D_PT_workflowtools
 from .operators import RemoveDublicateMaterials_Operator
 from .operators import RemoveAllMaterials_Operator
 from .operators import AddTriangulateModifier_Operator
+from .operators import RemoveAllUnusedMaterials_Operator
 #from .prefs import *
 
 from bpy.props import IntProperty, FloatProperty, BoolProperty, EnumProperty, StringProperty
@@ -111,6 +112,7 @@ classes = (
     RemoveDublicateMaterials_Operator,
     RemoveAllMaterials_Operator,
     AddTriangulateModifier_Operator,
+    RemoveAllUnusedMaterials_Operator,
     Prefs
     )
 

@@ -15,5 +15,8 @@ class VIEW3D_PT_workflowtools(bpy.types.Panel):
         rowRemoveAll = layout.row()
         rowRemoveAll.operator('object.remove_all_materials', text="Remove All Materials")
 
+        rowRemoveUnused = layout.row()
+        rowRemoveUnused.operator('object.remove_unused_materials', text="Remove Unslot Materials")
+
         rowTriangulate = layout.row()
         rowTriangulate.operator('object.add_triangulate_modifier', text="Add Triangulate")
