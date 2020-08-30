@@ -1,7 +1,7 @@
 bl_info = {
     "name" : "Snaki Workflow Tools",
-    "author" : "Snaki94",
-    "description" : "Snaki Workflow Tools",
+    "author" : "Snaki94, Zuorion",
+    "description" : "Workflow Tools",
     "blender" : (2, 83, 0),
     "version" : (0, 0, 2),
     "location" : "View3D",
