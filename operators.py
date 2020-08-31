@@ -52,14 +52,14 @@ class AddTriangulateModifier_Operator(bpy.types.Operator):
         return context.selected_objects is not None
 
     def execute(self, context):
-        
+
         for obj in bpy.context.selected_objects:
             countTriangulateModifiers = 0
             for mod in obj.modifiers:
                 if (mod.type == "TRIANGULATE"):
                     countTriangulateModifiers += 1
                     mod.keep_custom_normals = True
-                    #move Modifier at the bottom of stack
+                    #TODO move Modifier at the bottom of stack
             if (countTriangulateModifiers == 0):
                 modTriangulate = obj.modifiers.new("Triangulate", type = "TRIANGULATE")
                 modTriangulate.keep_custom_normals = True
@@ -79,10 +79,36 @@ class RemoveAllUnusedMaterials_Operator(bpy.types.Operator):
 
     def execute(self, context):
         for obj in bpy.context.selected_objects:
-            obj.active_material_index = 0
-            for i in range(len(obj.material_slots)):
-                bpy.ops.object.material_slot_remove_unused({'object': obj})
+            if obj.type == 'MESH':
+                mesh = obj.data
+                faces = mesh.polygons
+                slots = obj.material_slots
+
+                # get material index per face
+                face_len = len(faces)
+                used_material_indices = [0 for n in range(face_len)]
+                faces.foreach_get('material_index', used_material_indices)
+
+                # one index should only be once in the list
+                used_material_indices = set(used_material_indices)
+
+                # list unused material slots
+                slot_len = len(slots)
+                all_material_slot_indices = set(n for n in range(slot_len))
+                unused_slot_indices = all_material_slot_indices - used_material_indices
+
+                # override context's object to obj
+                ctx = bpy.context.copy()
+                ctx['object'] = obj
+
+                # delete unused slots
+                unused_slot_indices = list(unused_slot_indices)
+                unused_slot_indices.sort(reverse=True)
+                for slot_index in unused_slot_indices:
+                    obj.active_material_index = slot_index
+                    bpy.ops.object.material_slot_remove(ctx)
 
         self.report({'INFO'}, "Removed unused unslots from selection")
         bpy.context.view_layer.update()
         return {'FINISHED'}
+
