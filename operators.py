@@ -54,15 +54,19 @@ class AddTriangulateModifier_Operator(bpy.types.Operator):
     def execute(self, context):
 
         for obj in bpy.context.selected_objects:
-            countTriangulateModifiers = 0
-            for mod in obj.modifiers:
-                if (mod.type == "TRIANGULATE"):
-                    countTriangulateModifiers += 1
-                    mod.keep_custom_normals = True
-                    #TODO move Modifier at the bottom of stack
-            if (countTriangulateModifiers == 0):
-                modTriangulate = obj.modifiers.new("Triangulate", type = "TRIANGULATE")
-                modTriangulate.keep_custom_normals = True
+            if obj.type == 'MESH':
+                countTriangulateModifiers = 0
+                for mod in obj.modifiers:
+                    if (mod.type == "TRIANGULATE"):
+                        countTriangulateModifiers += 1
+                        obj.modifiers.remove(mod)
+                        modTriangulate = obj.modifiers.new("Triangulate", type = "TRIANGULATE")
+                        modTriangulate.keep_custom_normals = True
+                        
+
+                if (countTriangulateModifiers == 0):
+                    modTriangulate = obj.modifiers.new("Triangulate", type = "TRIANGULATE")
+                    modTriangulate.keep_custom_normals = True
         
         self.report({'INFO'}, "Added triangulate modifier to selected objects")
         bpy.context.view_layer.update()
